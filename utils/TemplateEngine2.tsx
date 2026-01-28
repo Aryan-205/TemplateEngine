@@ -8,6 +8,10 @@ import {
   Footer,
   EditorSidebar,
   ImageEditModal,
+  PhotoGallery,
+  BlogSection,
+  GuestListSection,
+  ContactSection,
 } from "./Components2";
 
 interface WeddingEngineProps {
@@ -66,29 +70,54 @@ export const WeddingEngine = ({
 
       {/* Page Content */}
       <Nav links={data.navLinks} />
-      <Hero
-        names={data.names}
-        imageUrl={data.heroImg}
-        onEditImage={
-          editable
-            ? () => openImageModal("heroImg", "Edit Hero Image")
-            : undefined
-        }
-      />
-      <MiddleSection
-        eventDate={data.date}
-        location={data.location}
-        description={data.story}
-        bgColor={data.themeColor}
-      />
-      <EndSection
-        imageUrl={data.detailImg}
-        onEditImage={
-          editable
-            ? () => openImageModal("detailImg", "Edit Detail Image")
-            : undefined
-        }
-      />
+
+      {/* Home Section */}
+      <section id="Home">
+        <Hero
+          names={data.names}
+          imageUrl={data.heroImg}
+          onEditImage={
+            editable
+              ? () => openImageModal("heroImg", "Edit Hero Image")
+              : undefined
+          }
+        />
+        <MiddleSection
+          eventDate={data.date}
+          location={data.location}
+          description={data.story}
+          bgColor={data.themeColor}
+        />
+        <EndSection
+          imageUrl={data.detailImg}
+          onEditImage={
+            editable
+              ? () => openImageModal("detailImg", "Edit Detail Image")
+              : undefined
+          }
+        />
+      </section>
+
+      {/* Photo Gallery Section */}
+      {data.photos && data.photos.length > 0 && (
+        <PhotoGallery photos={data.photos} themeColor={data.themeColor} />
+      )}
+
+      {/* Blog Section */}
+      {data.blogPosts && data.blogPosts.length > 0 && (
+        <BlogSection posts={data.blogPosts} themeColor={data.themeColor} />
+      )}
+
+      {/* Guest List Section */}
+      {data.guests && data.guests.length > 0 && (
+        <GuestListSection guests={data.guests} themeColor={data.themeColor} />
+      )}
+
+      {/* Contact Section */}
+      {data.contact && (
+        <ContactSection contact={data.contact} themeColor={data.themeColor} />
+      )}
+
       <Footer names={data.names} date={data.date} />
     </div>
   );
